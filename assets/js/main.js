@@ -36,6 +36,10 @@
   if (burger) burger.addEventListener("click", () => toggleMenu(true));
   if (close) close.addEventListener("click", () => toggleMenu(false));
   if (menu) menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => toggleMenu(false)));
+  // Tap the dark backdrop (not a link/button) to close
+  if (menu) menu.addEventListener("click", (e) => { if (e.target === menu) toggleMenu(false); });
+  // Escape key closes
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") toggleMenu(false); });
 
   // ---- Reveal on scroll ----
   const reveals = document.querySelectorAll(".reveal");
