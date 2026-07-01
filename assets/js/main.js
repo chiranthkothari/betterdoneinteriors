@@ -31,9 +31,14 @@
   const toggleMenu = (open) => {
     if (!menu) return;
     menu.classList.toggle("open", open);
+    if (burger) {
+      burger.classList.toggle("open", open);
+      burger.setAttribute("aria-expanded", String(open));
+      burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    }
     document.body.style.overflow = open ? "hidden" : "";
   };
-  if (burger) burger.addEventListener("click", () => toggleMenu(true));
+  if (burger) burger.addEventListener("click", () => toggleMenu(!menu.classList.contains("open")));
   if (close) close.addEventListener("click", () => toggleMenu(false));
   if (menu) menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => toggleMenu(false)));
   // Tap the dark backdrop (not a link/button) to close
